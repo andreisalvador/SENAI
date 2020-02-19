@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Afs.MergeSort", "Afs.MergeSort\Afs.MergeSort.csproj", "{F9CEFD2F-05BE-4E66-87BC-EE80DD462AC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeSort.Application", "MergeSort.Application\MergeSort.Application.csproj", "{7073428A-78BF-49BE-9697-F9C0112A15AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{F9CEFD2F-05BE-4E66-87BC-EE80DD462AC5}.Release|x64.Build.0 = Release|Any CPU
 		{F9CEFD2F-05BE-4E66-87BC-EE80DD462AC5}.Release|x86.ActiveCfg = Release|Any CPU
 		{F9CEFD2F-05BE-4E66-87BC-EE80DD462AC5}.Release|x86.Build.0 = Release|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Debug|x64.Build.0 = Debug|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Debug|x86.Build.0 = Debug|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Release|x64.ActiveCfg = Release|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Release|x64.Build.0 = Release|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{7073428A-78BF-49BE-9697-F9C0112A15AB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
