@@ -26,21 +26,20 @@ public class ListArray<T> implements IListArray<T> {
         this.size = 0;
     }
 
-
     @Override
-    public void Add(T value) {
-        this.Add(value, this.GetInternalIndex());
+    public void Add(T value) throws Exception {
+        this.Add(value, this.size);
     }
 
     @Override
-    public void Add(T value, int index) {
+    public void Add(T value, int index) throws Exception {
         BeforeAdd(value, index);
         this.internalArray[index] = value;
         AfterAdd(value, index);
     }
 
     @Override
-    public T Remove(int index) {
+    public T Remove(int index) throws Exception {
         T result = this.internalArray[index];
 
         BeforeRemove(index);
@@ -51,7 +50,7 @@ public class ListArray<T> implements IListArray<T> {
     }
 
     @Override
-    public boolean RemoveFirst(T value) {
+    public boolean RemoveFirst(T value) throws Exception {
         return Remove(this.IndexOf(value)) != null;
     }
 
@@ -107,7 +106,7 @@ public class ListArray<T> implements IListArray<T> {
     @Override
     public int LastIndexOf(T value) {
 
-        for (int index = this.internalArray.length; index < 0 ; index--) {
+        for (int index = this.size; index > 0 ; index--) {
             if(internalArray[index] == value)
                 return index;
         }
@@ -117,23 +116,23 @@ public class ListArray<T> implements IListArray<T> {
 
     @Override
     public T[] ToArray() {
-        return Arrays.copyOfRange(this.internalArray, 0, size - 1);
+        return (T[])Arrays.copyOfRange(this.internalArray, 0, size - 1);
     }
 
     private void ResizeListArray() {
         this.internalArray = Arrays.copyOf(this.internalArray, this.internalArray.length + this.x);
     }
 
-    private void BeforeAdd(value, index) {
+    private void BeforeAdd(T value, int index) throws Exception {
         if(this.IsFull() && !resizable)
-            throw new Exception("You can't add value to list because it's full and not resazible.")
+            throw new Exception("You can't add value to list because it's full and not resazible.");
 
         if (this.IsFull())
             ResizeListArray();
 
-        if (index != this.GetInternalIndex())
-            for (int from = index; i < this.internalArray.length; i++) {
-                int to = from + 1
+        if (index != this.size)
+            for (int from = this.size; from >= index ; from--) {
+                int to = from + 1;
                 this.internalArray[to] = this.internalArray[from];
             }
     }
@@ -142,21 +141,18 @@ public class ListArray<T> implements IListArray<T> {
         this.size++;
     }
 
-    private void BeforeRemove(int index) {
+    private void BeforeRemove(int index) throws Exception {
         if(this.IsEmpty())
             throw new Exception("You can't remove value because list is empty.");
 
     }
 
     private void AfterRemove(int index) {
-        for (int to = index; i < this.internalArray.length; i++) {
-            int from = to + 1;
+        for (int from = index + 1; from < this.size; from++) {
+            int to = from - 1;
             this.internalArray[to] = this.internalArray[from];
         }
+        this.internalArray[size - 1] = null;
         this.size--;
-    }
-
-    private int GetInternalIndex() {
-        return this.size > 0 ? this.size - 1 : 0;
     }
 }
