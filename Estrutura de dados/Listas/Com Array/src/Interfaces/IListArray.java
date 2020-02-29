@@ -4,7 +4,7 @@ public interface IListArray<T> {
     void Add(T value);
     void Add(T value, int index);
     T Remove(int index);
-    boolean RemoveFirst(int index);
+    boolean RemoveFirst(T value);
     T Get(int index);
     void Clear();
     T Set(T value, int index);
