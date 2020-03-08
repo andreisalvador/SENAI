@@ -7,6 +7,6 @@ public class Main {
         }
         lista.Add(4);
         lista.Add(15);
-        int x = lista.LastIndexOf(4);
+        Object[] x = lista.ToArray();
     }
 }

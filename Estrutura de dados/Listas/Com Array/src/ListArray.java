@@ -116,7 +116,7 @@ public class ListArray<T> implements IListArray<T> {
 
     @Override
     public T[] ToArray() {
-        return (T[])Arrays.copyOfRange(this.internalArray, 0, size - 1);
+        return Arrays.copyOfRange(this.internalArray, 0, size);
     }
 
     private void ResizeListArray() {
