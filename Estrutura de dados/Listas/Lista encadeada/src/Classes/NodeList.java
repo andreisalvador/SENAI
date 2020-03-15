@@ -6,12 +6,12 @@ public class NodeList<T> implements INodeList<T> {
     private T info;
     private INodeList<T> next;
 
-    public NodeList(){
-
+    public NodeList(T info) {
+        this.info = info;
     }
 
-    public NodeList(T info, INodeList<T> next){
-        this.info = info;
+    public NodeList(T info, INodeList<T> next) {
+        this(info);
         this.next = next;
     }
 

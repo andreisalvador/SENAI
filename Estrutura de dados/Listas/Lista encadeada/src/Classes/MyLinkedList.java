@@ -1,5 +1,7 @@
 package Classes;
 
+import Classes.NodeIntervals.NodeListInterval;
+import Classes.NodeIntervals.NodeListIntervalResult;
 import Interfaces.*;
 
 public class MyLinkedList<T> implements ILinkedList<T> {
@@ -14,53 +16,56 @@ public class MyLinkedList<T> implements ILinkedList<T> {
 
     @Override
     public void Add(int index, T value) {
-        BeforeAdd(index, value);
+        if (index > this.counter || index < 0)
+            throw new IndexOutOfBoundsException("Index fora dos limites da lista.");
 
-        INodeList<T> lastNodeBeforeAdd = null;
-        INodeList<T> nextNodeBeforeAdd = null;
-        INodeList<T> currentNode = this.first;
+        INodeList<T> newNode = new NodeList<T>(value);
 
-        for (int i = 0; i <= index; i++) {
-            if (i + 1 == index){
-                lastNodeBeforeAdd = currentNode;
-                nextNodeBeforeAdd = currentNode.getNext();
-            }
-            if (currentNode != null)
-                currentNode = currentNode.getNext();
+        if (this.first == null && this.last == null) {
+            this.first = newNode;
+            this.last = newNode;
+        } else {
+            NodeListIntervalResult<T> nodeInterval = new NodeListInterval<T>(this.first).GetIntervalFromTargetNodeIndex(index);
+
+            if (nodeInterval.HasNextNode())
+                newNode.setNext(nodeInterval.getTargetNode());
+
+            if (nodeInterval.HasLastNode())
+                nodeInterval.getLastNodeBeforeTargetNode().setNext(newNode);
+            else
+                this.first = newNode;
         }
 
-        INodeList<T> newNode = new NodeList<T>(value, nextNodeBeforeAdd);
-        lastNodeBeforeAdd.setNext(newNode);
-
-        AfterAdd(index, value);
+        this.counter++;
     }
 
     @Override
-    public T Remove(T value) {
-        INodeList<T> node = this.first;
-        INodeList<T> lastNode = null;
-        T info = this.first.getInfo();
+    public T Remove(int index) {
+        if (index > this.counter || index < 0)
+            throw new IndexOutOfBoundsException("Index fora dos limites da lista.");
 
-        while (info != value) {
-            lastNode = node;
-            node = node.getNext();
-            info = node.getInfo();
-        }
+        NodeListIntervalResult<T> nodeInterval = new NodeListInterval<T>(this.first).GetIntervalFromTargetNodeIndex(index);
 
-        lastNode.setNext(node.getNext());
-        node.setNext(null);
+        nodeInterval.getLastNodeBeforeTargetNode().setNext(nodeInterval.getNextNodeAfterTargetNode());
+        nodeInterval.getTargetNode().setNext(null);
 
-        return node.getInfo();
+        return nodeInterval.getTargetNode().getInfo();
     }
 
     @Override
     public boolean RemoveFirst(T value) {
-        return Remove(value) != null;
+        return Remove(IndexOf(value)) != null;
     }
 
     @Override
     public T Get(int index) {
-        return null;
+        INodeList<T> node = this.first;
+        for (int i = 0; i < counter; i++) {
+            if (i == index)
+                break;
+            node = node.getNext();
+        }
+        return node.getInfo();
     }
 
     @Override
@@ -72,7 +77,13 @@ public class MyLinkedList<T> implements ILinkedList<T> {
 
     @Override
     public T Set(int index, T value) {
-        return null;
+        NodeListIntervalResult<T> nodeInterval = new NodeListInterval<T>(this.first).GetIntervalFromTargetNodeIndex(index);
+
+        INodeList<T> newNode = new NodeList<>(value, nodeInterval.getNextNodeAfterTargetNode());
+        nodeInterval.getLastNodeBeforeTargetNode().setNext(newNode);
+        nodeInterval.getTargetNode().setNext(null);
+
+        return nodeInterval.getTargetNode().getInfo();
     }
 
     @Override
@@ -92,33 +103,40 @@ public class MyLinkedList<T> implements ILinkedList<T> {
 
     @Override
     public int IndexOf(T value) {
-        return 0;
+        return InternalIndexOf(value, false);
     }
 
     @Override
     public int LastIndexOf(T value) {
-        return 0;
+        return InternalIndexOf(value, true);
     }
 
     @Override
     public T[] ToArray() {
-        return null;
-    }
-
-    private void BeforeAdd(int index, T value) {
-        if (this.counter == 0) {
-            INodeList<T> node = new NodeList<T>(value, null);
-            this.first = node;
-            this.last = node;
-        } else if (index == -1) {
-            INodeList<T> node = new NodeList<T>(value, null);
-            INodeList<T> oldLast = this.last;
-            oldLast.setNext(node);
-            this.last = node;
+        INodeList<T> node = this.first;
+        T[] result = (T[]) new Object[counter];
+        for (int i = 0; i < counter; i++) {
+            if (node != null) {
+                result[i] = node.getInfo();
+                node = node.getNext();
+            } else
+                break;
         }
+        return result;
     }
 
-    private void AfterAdd(int index, T value) {
-        this.counter++;
+    private int InternalIndexOf(T value, boolean untilLast) {
+        INodeList<T> node = this.first;
+        int index = -1;
+
+        for (int i = 0; i < counter; i++) {
+            if (node.getInfo() == value) {
+                index = i;
+                if (!untilLast)
+                    break;
+            } else
+                node = node.getNext();
+        }
+        return index;
     }
 }
