@@ -1,0 +1,48 @@
+{
+    "placas": [
+        {
+            "placa": "mbl 5544",
+            "localidade": "sc-blumenau",
+            "dados_infracao": {
+                "datahora": "20/01/2019 09:43:22",
+                "tipo": "velocidade",
+                "valor": 190,
+                "vel_maxima": 80
+            }
+        },
+        {
+            "placa": "aab 1327",
+            "localidade": "sp-são paulo",
+            "dados_infracao": {
+                "datahora": "16/03/2018 23:22:22",
+                "tipo": "farol vermelho"
+            }
+        },
+        {
+            "placa": "cav 3548",
+            "localidade": "pe-recife",
+            "dados_infracao": {
+                "datahora": "20/01/2019 12:11:22",
+                "tipo": "ultrapassagem proibida"
+            }
+        },
+        {
+            "placa": "ppr 4800",
+            "localidade": "go-goiania",
+            "dados_infracao": {
+                "datahora": "20/12/2018 14:01:22",
+                "tipo": "estacionar em local proibido"
+            }
+        },
+        {
+            "placa": "asa 1122",
+            "localidade": "sp-mogi das cruzes",
+            "dados_infracao": {
+                "datahora": "20/01/2019 15:21:22",
+                "tipo": "velocidade",
+                "valor": 90,
+                "vel_maxima": 80
+            }
+        }
+    ]
+}
