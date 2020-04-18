@@ -35,12 +35,13 @@ public class MyQueue<T> implements IMyQueue<T> {
 
     @Override
     public boolean IsEmpty() {
-        return this.records == null || this.records.length == 0;
+        return this.records == null || recordsCount == 0;
     }
 
     @Override
     public void Free() {
         this.records = (T[])new Object[queueLength];
+        recordsCount = 0;
     }
 
     private int GetQueueEnd(){
