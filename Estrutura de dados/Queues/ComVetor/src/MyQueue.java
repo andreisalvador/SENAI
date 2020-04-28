@@ -49,7 +49,7 @@ public class MyQueue<T> implements IMyQueue<T> {
     }
 
     private int GetQueueInit() {
-        if(queueInit + 1 > (queueLength - 1))
+        if(queueInit + 1 > queueLength)
             queueInit = 0;
 
         return queueInit++;

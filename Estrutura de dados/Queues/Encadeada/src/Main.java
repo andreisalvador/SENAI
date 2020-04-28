@@ -31,5 +31,8 @@ public class Main {
             Integer value = isQueuing ? insertEvent.apply(i) : queue.Remove();
             System.out.printf("%s number %s \n", isQueuing ? "Queued" : "Dequeued", value);
         }
+
+        System.out.printf("Is queue empty? -> %s \n", queue.IsEmpty());
+        System.out.println("=================================================================================");
     }
 }
