@@ -4,10 +4,9 @@ import Interfaces.ITower;
 import Rings.TowerRingBase;
 
 import java.util.Stack;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class Tower implements ITower {
+    public static final int RINGS_QUANTITY = 5;
     private Stack<TowerRingBase> rings;
 
     public Tower() {
@@ -31,8 +30,10 @@ public class Tower implements ITower {
 
     @Override
     public void PrintTower() {
-        for (int i = this.rings.size() - 1; i >= 0 ; i--) {
-            System.out.println("||" + this.rings.elementAt(i).toString());
+        for (int i = this.rings.size() - 1; i >= 0; i--) {
+            String spaces = " ".repeat(RINGS_QUANTITY - this.rings.elementAt(i).GetRingId());
+
+            System.out.println(spaces + this.rings.elementAt(i).toString() + "||" + this.rings.elementAt(i).toString());
         }
     }
 

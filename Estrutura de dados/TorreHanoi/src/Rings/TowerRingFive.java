@@ -2,6 +2,6 @@ package Rings;
 
 public class TowerRingFive extends TowerRingBase {
     public TowerRingFive() {
-        super((byte) 5, '#');
+        super((byte) 5, '=');
     }
 }
