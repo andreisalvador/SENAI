@@ -1,0 +1,18 @@
+{
+    "scheduleNotFoud": {
+        "status": 400,
+        "description": "Schedule not found."
+    },
+    "scheduleInSameDay":{
+        "status": 400,
+        "description": "It's not possible register more than one time one the same day."
+    },
+    "maxPeopleByPeriod":{
+        "status": 400,
+        "description": "It's not possible register because the maximum number of people has been reached."
+    },
+    "betweenOpeningHours":{
+        "status": 400,
+        "description": "It's not possible register because out of opening hours."
+    }
+}
