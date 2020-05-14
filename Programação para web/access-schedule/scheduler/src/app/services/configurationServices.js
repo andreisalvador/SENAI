@@ -1,13 +1,22 @@
 const ConfigurationSchema = require('../models/configuration')
+const errors = require('../../resources/errors/en.json')
 
 module.exports = {
     async getById(_id) {
-        const configuration = ConfigurationSchema.getById(_id)
+        try {
+            const configuration = await ConfigurationSchema.findById(_id)
 
-        if (!configuration)
-            throw errors.configurationNotFound
+            if (!configuration)
+                throw errors.configurationNotFound
 
-        return configuration
+            return configuration
+        } catch (error) {
+            throw {
+                status: 400,
+                description: error
+            }
+        }
+
     },
     async create(configurationDto) {
         try {
@@ -22,10 +31,10 @@ module.exports = {
     },
     async update(_id, configurationDto) {
         try {
-            const configuration = await ConfigurationSchema.findByIdAndUpdate({ _id }, { configurationDto })
+            const configuration = await ConfigurationSchema.findByIdAndUpdate(_id, configurationDto, { new: true }).select('+locationName')
 
             if (!configuration)
-                throw ''
+                throw errors.configurationNotFound
 
             return configuration
         } catch (error) {
@@ -40,14 +49,14 @@ module.exports = {
             const configuration = await ConfigurationSchema.findByIdAndDelete({ _id })
 
             if (!configuration)
-                throw ''
+                throw errors.configurationNotFound
 
             return configuration
         } catch (error) {
 
         }
     },
-    async getAllWith(configurationDto){
+    async getAllWith(configurationDto) {
         return await ConfigurationSchema.find(configurationDto.filters).select(`+${configurationDto.selectSubDocuments}`)
     }
 }

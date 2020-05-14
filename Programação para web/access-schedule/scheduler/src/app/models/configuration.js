@@ -4,7 +4,9 @@ const ConfigurationSchema = new mongoose.Schema({
     locationName:{
         type: String,
         require: true,
-        select: false
+        select: false,
+        minlength: 3,
+        maxlength: 200
     },
     maxPeopleByPeriod: {
         type: Number,
@@ -22,9 +24,7 @@ const ConfigurationSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    usersAllowed: [{
-        user: String
-    }]
+    usersAllowed: [String]
 })
 
 

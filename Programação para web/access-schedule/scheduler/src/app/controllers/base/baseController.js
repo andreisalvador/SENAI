@@ -1,8 +1,8 @@
 module.exports = {
     async getById(Services, req, res) {
-        try {
-            res.send(await Services.getById(req.body._id))
-        } catch (error) {
+        try {                        
+            res.send(await Services.getById(req.params._id))
+        } catch (error) {            
             res.status(error.status).send(error.description)
         }
     },
@@ -29,6 +29,7 @@ module.exports = {
     },
     async getAllWith(Services, req, res) {
         try {                        
+            console.log('tete')
             res.send(await Services.getAllWith(req.body))
         } catch (error) {
             res.status(error.status).send(error.description)

@@ -3,6 +3,10 @@
         "status": 400,
         "description": "Schedule not found."
     },
+    "scheduleAlreadyExist":{
+        "status": 400,
+        "description": "Schedule already exists for this date."
+    },
     "scheduleInSameDay":{
         "status": 400,
         "description": "It's not possible register more than one time one the same day."
@@ -14,5 +18,9 @@
     "betweenOpeningHours":{
         "status": 400,
         "description": "It's not possible register because out of opening hours."
+    },
+    "configurationNotFound": {
+        "status": 400,
+        "description": "Configuration not found."
     }
 }

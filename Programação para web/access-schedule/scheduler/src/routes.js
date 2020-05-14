@@ -17,6 +17,7 @@ routes.delete(`/${scheduleRoute}/:_id`, (req, res) => genericController.delete(S
 
 routes.post(`/${configurationRoute}/`, (req, res) => genericController.create(ConfigurationServices, req, res))
 routes.get(`/${configurationRoute}/:_id`, (req, res) => genericController.getById(ConfigurationServices, req, res));
+routes.post(`/${configurationRoute}/filterConfigs/`, (req, res) => genericController.getAllWith(ConfigurationServices, req, res));
 routes.put(`/${configurationRoute}/:_id`, (req, res) => genericController.update(ConfigurationServices, req, res))
 routes.delete(`/${configurationRoute}/:_id`, (req, res) => genericController.delete(ConfigurationServices, req, res));
 
