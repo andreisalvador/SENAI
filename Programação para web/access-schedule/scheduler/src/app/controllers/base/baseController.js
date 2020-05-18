@@ -28,8 +28,7 @@ module.exports = {
         }
     },
     async getAllWith(Services, req, res) {
-        try {                        
-            console.log('tete')
+        try {                                    
             res.send(await Services.getAllWith(req.body))
         } catch (error) {
             res.status(error.status).send(error.description)

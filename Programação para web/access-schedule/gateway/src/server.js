@@ -1,0 +1,43 @@
+const express = require('express');
+const httpProxy = require('express-http-proxy');
+const cors = require('cors');
+const path = require('path');
+const middleware = require('./middlewares/middleware');
+const helmet = require('helmet')
+const i18n = require('i18n')
+
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+const app = express()
+
+
+app.use(helmet())
+const site = process.env.ALLOW_FROM_URL;
+
+app.use(cors({
+        origin: site,
+        optionsSuccessStatus: 200    
+    }));
+    
+i18n.configure({
+    locales: ['pt-BR', 'pt', 'en-US', 'en'],
+    directory: `${__dirname}/resources/errors`
+})
+
+app.use(i18n.init)    
+const userServiceProxy = httpProxy(process.env.AUTH_API_URL);
+const scheduleServiceProxy = httpProxy(process.env.SCHEDULE_API_URL);
+    
+app.post('/auth/*', (req, res, next) => userServiceProxy(req, res, next));
+app.get('/auth/*', (req, res, next) => userServiceProxy(req, res, next));
+app.put('/auth/*', (req, res, next) => userServiceProxy(req, res, next));
+app.delete('/auth/*', (req, res, next) => userServiceProxy(req, res, next));
+
+
+app.get('/schedule*', (req, res, next) => middleware(req, res, () => scheduleServiceProxy(req, res, next)));
+app.put('/schedule*', (req, res, next) => middleware(req, res, () => scheduleServiceProxy(req, res, next)));
+app.delete('/schedule*', (req, res, next) => middleware(req, res, () => scheduleServiceProxy(req, res, next)));
+app.post('/schedule*', (req, res, next) => middleware(req, res, () => scheduleServiceProxy(req, res, next)));
+
+const port = process.env.PORT || 3000;
+app.listen(port);
