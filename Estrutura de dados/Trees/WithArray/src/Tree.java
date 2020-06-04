@@ -49,12 +49,12 @@ public class Tree<T> implements ITree<T> {
 
     @Override
     public boolean IsEmpty() {
-        return arrayTree.length == 0;
+        return GetNodesQuantity() == 0;
     }
 
     @Override
     public boolean IsFull() {
-        return arrayTree.length == GetMaxTreeNodesAllowedByHeight(maxHeight);
+        return GetNodesQuantity() == maxNodesAllowedInTree;
     }
 
     @Override
