@@ -8,6 +8,7 @@ public class TowerRingBase {
         this.ringIcon = ringIcon;
         this.ringId = ringId;
     }
+    
 
     @Override
     public String toString() {
