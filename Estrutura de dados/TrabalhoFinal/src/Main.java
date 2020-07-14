@@ -4,6 +4,7 @@ import BinaryTree.SearchBinaryTree;
 import Timer.TimeWatcher;
 
 import java.lang.reflect.InvocationTargetException;
+import java.security.SignedObject;
 
 public class Main {
 
@@ -16,7 +17,14 @@ public class Main {
         tree.Insert(1);
         tree.Insert(4);
         tree.Insert(3);
-
+        watcher.ApplyDefaultToStringFunctionToMethodsResult((Object array) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[");
+            for (int value: (int[])array) sb.append(String.format(" %s ", value));
+            sb.append("]");
+            return sb.toString();
+        });
+//watcher.Watch("BubbleSortByLevel");
         watcher.Watch("BubbleSortByLevel", "QuickSortByLevel", "MergeSortByLevel");
         System.out.println(watcher.GetDiagnosticsReport());
 

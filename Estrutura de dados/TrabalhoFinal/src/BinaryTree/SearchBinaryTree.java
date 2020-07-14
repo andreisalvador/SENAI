@@ -128,18 +128,22 @@ public class SearchBinaryTree {
         return  result;
     }
 
-    public void BubbleSortByLevel(){
-        BubbleSort.Sort(ToArrayByLevel());
+    public int[] BubbleSortByLevel(){
+        int[] array = ToArrayByLevel();
+        BubbleSort.Sort(array);
+        return array;
     }
 
-    public void QuickSortByLevel(){
+    public int[] QuickSortByLevel(){
         int[] array = ToArrayByLevel();
         QuickSort.Sort(array, 0, array.length - 1);
+        return array;
     }
 
-    public void MergeSortByLevel(){
+    public int[] MergeSortByLevel(){
         int[] array = ToArrayByLevel();
         MergeSort.Sort(array, 0, array.length - 1);
+        return array;
     }
 
     public int[] QuickSort(){

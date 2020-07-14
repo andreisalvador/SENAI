@@ -10,20 +10,28 @@ import java.util.function.Supplier;
 public class TimeWatcher<T> {
     private T objectToWatch;
     private ArrayList<TimeWatcherDiagnostic> diagnostics;
+    private Function<Object, String> defaultToStringFunctionMethodResult;
 
     public TimeWatcher(T objectToWatch){
         this.objectToWatch = objectToWatch;
         this.diagnostics = new ArrayList<TimeWatcherDiagnostic>();
     }
 
-    public void Watch(String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void Watch(String methodName) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        Watch(methodName, null);
+    }
+
+    public <T> void Watch(String methodName, Function<T, String> methodResultToStringFunction) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         double startedAt = System.currentTimeMillis();
 
         Object methodResult = objectToWatch.getClass().getMethod(methodName, null).invoke(objectToWatch, null);
 
         double runningTime = System.currentTimeMillis() - startedAt;
 
-        diagnostics.add(new TimeWatcherDiagnostic(methodName, runningTime, methodResult));
+        if(defaultToStringFunctionMethodResult != null && methodResultToStringFunction == null)
+            methodResultToStringFunction = (Function<T, String>)defaultToStringFunctionMethodResult;
+
+        diagnostics.add(new TimeWatcherDiagnostic<T>(methodName, runningTime, methodResult, methodResultToStringFunction));
     }
 
     public void Watch(String...methodNames) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -31,6 +39,8 @@ public class TimeWatcher<T> {
             Watch(methodName);
         }
     }
+
+    public void ApplyDefaultToStringFunctionToMethodsResult(Function<Object, String> function) { defaultToStringFunctionMethodResult = function; }
 
     public ArrayList<TimeWatcherDiagnostic> GetDiagnostics(){
         return diagnostics;
