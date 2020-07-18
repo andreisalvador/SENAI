@@ -33,4 +33,8 @@ public class QuickSort {
         if (finalIndex > i)
             Sort(arrayToSort, i, finalIndex);
     }
+
+    public static void Sort(int[] arrayToSort){
+        Sort(arrayToSort, 0, arrayToSort.length - 1);
+    }
 }

@@ -4,11 +4,11 @@ import java.util.function.Function;
 
 public final class TimeWatcherDiagnostic<T> {
     private String methodName;
-    private double runningTime;
+    private long runningTime;
     private Object methodResult;
     private Function<T, String> resultToString;
 
-    public TimeWatcherDiagnostic(String methodName, double runningTime, Object methodResult, Function<T, String> methodResultToStringFunction){
+    public TimeWatcherDiagnostic(String methodName, long runningTime, Object methodResult, Function<T, String> methodResultToStringFunction){
         this.methodName = methodName;
         this.runningTime = runningTime;
         this.methodResult = methodResult;
@@ -16,7 +16,7 @@ public final class TimeWatcherDiagnostic<T> {
     }
     public String getMethodName(){ return methodName; }
 
-    public double getRunningTime(){
+    public long getRunningTime(){
         return runningTime;
     }
 

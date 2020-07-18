@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TrabalhoABB:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TrabalhoABB_jar</output-path>
+    <root id="archive" name="TrabalhoABB.jar">
+      <element id="module-output" name="TrabalhoABB" />
+    </root>
+  </artifact>
+</component>

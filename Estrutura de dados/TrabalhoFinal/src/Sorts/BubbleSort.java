@@ -3,7 +3,7 @@ package Sorts;
 import java.util.ArrayList;
 
 public final class BubbleSort {
-    public static void Sort(int[] arrayToSort) {
+    public static int[] Sort(int[] arrayToSort) {
         int arrayLength = arrayToSort.length;
         int aux = 0;
         for (int mainIndex = 0; mainIndex < arrayLength; mainIndex++) {
@@ -16,5 +16,6 @@ public final class BubbleSort {
 
             }
         }
+        return null;
     }
 }

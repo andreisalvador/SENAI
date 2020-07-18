@@ -1,35 +1,62 @@
 package Sorts;
 
 public class MergeSort {
-    public static void Sort(int arrayToSort[], int startIndex, int finalIndex) {
-        int middleIndex;
-        if (startIndex < finalIndex) {
-            middleIndex = (startIndex + finalIndex) / 2;
-            Sort(arrayToSort, startIndex, middleIndex);
-            Sort(arrayToSort, middleIndex + 1, finalIndex);
-            Interleave(arrayToSort, startIndex, middleIndex, finalIndex);
+
+
+    private static void merge(int arrayToSort[], int leftIndex, int middleIndex, int rightIndex)
+    {
+        int leftArrayLength = middleIndex - leftIndex + 1;
+        int rightArrayLength = rightIndex - middleIndex;
+        int leftArray[] = new int[leftArrayLength];
+        int rightArray[] = new int[rightArrayLength];
+
+        for (int i = 0; i < leftArrayLength; ++i)
+            leftArray[i] = arrayToSort[leftIndex + i];
+        for (int j = 0; j < rightArrayLength; ++j)
+            rightArray[j] = arrayToSort[middleIndex + 1 + j];
+
+        int i = 0;
+        int j = 0;
+        int k = leftIndex;
+
+        while (i < leftArrayLength && j < rightArrayLength) {
+            if (leftArray[i] <= rightArray[j]) {
+                arrayToSort[k] = leftArray[i];
+                i++;
+            }
+            else {
+                arrayToSort[k] = rightArray[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < leftArrayLength) {
+            arrayToSort[k] = leftArray[i];
+            i++;
+            k++;
+        }
+
+        while (j < rightArrayLength) {
+            arrayToSort[k] = rightArray[j];
+            j++;
+            k++;
         }
     }
 
-    private static void Interleave(int array[], int startIndex, int middleIndex, int finalIndex) {
-        int i, j, k;
-        int auxArray[] = new int[array.length];
-        for (i = startIndex; i < middleIndex; i++) {
-            auxArray[i] = array[i];
+    private static void Sort(int arrayToSort[], int startIndex, int finalIndex)
+    {
+        if (startIndex < finalIndex) {
+            int middleIndex = (startIndex + finalIndex) / 2;
+
+            Sort(arrayToSort, startIndex, middleIndex);
+            Sort(arrayToSort, middleIndex + 1, finalIndex);
+
+            merge(arrayToSort, startIndex, middleIndex, finalIndex);
         }
-        for (j = middleIndex + 1; j < finalIndex; j++) {
-            auxArray[finalIndex + middleIndex + 1 - j] = array[j];
-        }
-        i = startIndex;
-        j = finalIndex;
-        for (k = startIndex; k < finalIndex; k++) {
-            if (auxArray[i] <= auxArray[j]) {
-                array[k] = auxArray[i];
-                i = i + 1;
-            } else {
-                array[k] = auxArray[j];
-                j = j - 1;
-            }
-        }
+    }
+
+    public static void Sort(int[] arrayToSort){
+        Sort(arrayToSort, 0, arrayToSort.length - 1);
     }
 }

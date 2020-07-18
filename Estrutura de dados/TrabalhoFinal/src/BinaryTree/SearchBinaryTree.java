@@ -92,8 +92,7 @@ public class SearchBinaryTree {
 
     private void ByLevel(SearchBinaryTreeNode node, int[] array, Incrementer incrementer){
         if(node != null){
-            int index = incrementer.Value;
-            array[index] = node.getValue();
+            array[incrementer.Value] = node.getValue();
             incrementer.Increment();
 
             SearchBinaryTreeNode leftNode = node.getLeftNode();
@@ -104,28 +103,37 @@ public class SearchBinaryTree {
         }
     }
 
+    private void InOrder(SearchBinaryTreeNode node, int[] array, Incrementer incrementer){
+        if(node != null){
+            InOrder(node.getLeftNode(), array, incrementer);
+            array[incrementer.Value] = node.getValue();
+            incrementer.Increment();
+            InOrder(node.getRightNode(), array, incrementer);
+        }
+    }
+
+    private void PreOrder(SearchBinaryTreeNode node, int[] array, Incrementer incrementer){
+        if(node != null){
+            array[incrementer.Value] = node.getValue();
+            incrementer.Increment();
+            InOrder(node.getLeftNode(), array, incrementer);
+            InOrder(node.getRightNode(), array, incrementer);
+        }
+    }
+
+    private void PostOrder(SearchBinaryTreeNode node, int[] array, Incrementer incrementer){
+        if(node != null){
+            InOrder(node.getLeftNode(), array, incrementer);
+            InOrder(node.getRightNode(), array, incrementer);
+            array[incrementer.Value] = node.getValue();
+            incrementer.Increment();
+        }
+    }
+
     public int[] ToArrayByLevel(){
         int[] arrayResult = new int[quantity];
         ByLevel(rootNode, arrayResult, new Incrementer());
         return arrayResult;
-    }
-
-    public String ToArrayInOrder(){
-        return  "";
-    }
-
-    public String ToArrayPostOrder(){
-        return  "";
-    }
-
-    public String ToStringPreOrder(){
-        return  "";
-    }
-
-    public int[] BubbleSort(){
-        int[] result = null;
-        BubbleSort.Sort(result);
-        return  result;
     }
 
     public int[] BubbleSortByLevel(){
@@ -136,25 +144,85 @@ public class SearchBinaryTree {
 
     public int[] QuickSortByLevel(){
         int[] array = ToArrayByLevel();
-        QuickSort.Sort(array, 0, array.length - 1);
+        QuickSort.Sort(array);
         return array;
     }
 
     public int[] MergeSortByLevel(){
         int[] array = ToArrayByLevel();
-        MergeSort.Sort(array, 0, array.length - 1);
+        MergeSort.Sort(array);
         return array;
     }
 
-    public int[] QuickSort(){
-        int[] result = null;
-        QuickSort.Sort(null, 0, result.length - 1);
-        return result;
+    public int[] ToArrayInOrder() {
+        int[] arrayResult = new int[quantity];
+        InOrder(rootNode, arrayResult, new Incrementer());
+        return arrayResult;
     }
 
-    public int[] MergeSort(){
-        int[] result = null;
-        MergeSort.Sort(result, 0, result.length);
-        return result;
+    public int[] BubbleSortInOrder(){
+        int[] array = ToArrayInOrder();
+        BubbleSort.Sort(array);
+        return array;
+    }
+
+    public int[] QuickSortInOrder(){
+        int[] array = ToArrayInOrder();
+        QuickSort.Sort(array);
+        return array;
+    }
+
+    public int[] MergeSortInOrder(){
+        int[] array = ToArrayInOrder();
+        MergeSort.Sort(array);
+        return array;
+    }
+
+    public int[] ToArrayPreOrder() {
+        int[] arrayResult = new int[quantity];
+        PreOrder(rootNode, arrayResult, new Incrementer());
+        return arrayResult;
+    }
+
+    public int[] BubbleSortPreOrder(){
+        int[] array = ToArrayPreOrder();
+        BubbleSort.Sort(array);
+        return array;
+    }
+
+    public int[] QuickSortPreOrder(){
+        int[] array = ToArrayPreOrder();
+        QuickSort.Sort(array);
+        return array;
+    }
+
+    public int[] MergeSortPreOrder(){
+        int[] array = ToArrayPreOrder();
+        MergeSort.Sort(array);
+        return array;
+    }
+
+    public int[] ToArrayPostOrder() {
+        int[] arrayResult = new int[quantity];
+        PostOrder(rootNode, arrayResult, new Incrementer());
+        return arrayResult;
+    }
+
+    public int[] BubbleSortPostOrder(){
+        int[] array = ToArrayPostOrder();
+        BubbleSort.Sort(array);
+        return array;
+    }
+
+    public int[] QuickSortPostOrder(){
+        int[] array = ToArrayPostOrder();
+        QuickSort.Sort(array);
+        return array;
+    }
+
+    public int[] MergeSortPostOrder(){
+        int[] array = ToArrayPostOrder();
+        MergeSort.Sort(array);
+        return array;
     }
 }
