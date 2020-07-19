@@ -63,6 +63,7 @@ public class TimeWatcher<T> {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("Class: %s \r\n", objectToWatch.getClass().getName()));
+        sb.append(String.format("%s to string: %s \r\n", objectToWatch.getClass().getName(), objectToWatch.toString()));
         for (TimeWatcherDiagnostic diagnostic: diagnostics) {
             sb.append("=====================================================\r\n");
             sb.append(String.format("Method: %s \r\n", diagnostic.getMethodName()));

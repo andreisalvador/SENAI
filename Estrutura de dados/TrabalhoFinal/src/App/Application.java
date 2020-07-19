@@ -17,7 +17,7 @@ public class Application {
     public ArrayList<String> PrepareMethodsToWatch(){
         String[] orders = {"InOrder","ByLevel","PreOrder","PostOrder"};
         String[] sortTypes = {"MergeSort","QuickSort","BubbleSort"};
-        ArrayList<String> methodsToWatch = new ArrayList<>(16);
+        ArrayList<String> methodsToWatch = new ArrayList<>(17);
 
         for (int i = 0; i < orders.length; i++) {
             methodsToWatch.add(String.format("ToArray%s", orders[i]));
@@ -26,6 +26,7 @@ public class Application {
                 methodsToWatch.add(String.format("%s%s", sortTypes[j], orders[i]));
             }
         }
+
         return methodsToWatch;
     }
 

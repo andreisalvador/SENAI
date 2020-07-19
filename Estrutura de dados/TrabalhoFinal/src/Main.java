@@ -1,6 +1,7 @@
 import App.Application;
 import App.Menu;
 import BinaryTree.SearchBinaryTree;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,25 +19,24 @@ public class Main {
 
         Menu.ValidateOption(buffer, option);
 
-        while(!option.equalsIgnoreCase("X")){
+        while (!option.equalsIgnoreCase("X")) {
 
             System.out.println("Informe o valor: ");
             String value = buffer.readLine();
 
-            if(Menu.IsValidValue(value)){
+            if (Menu.IsValidValue(value)) {
                 Menu.ExecuteOption(tree, Byte.parseByte(option), Integer.parseInt(value));
-            }else{
-                option = buffer.readLine();
+            } else {
+                option = value;
                 Menu.ValidateOption(buffer, option);
 
-                if(option.equalsIgnoreCase("A")){
+                if (option.equalsIgnoreCase("A")) {
                     Menu.PrintMenu();
                     option = buffer.readLine();
                     Menu.ValidateOption(buffer, option);
                 }
             }
         }
-
         System.out.println(new Application(tree).GetResults());
     }
 }
